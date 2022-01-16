@@ -1,0 +1,75 @@
+package frc.robot.commands;
+
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
+import frc.robot.Constants;
+
+public class GoToShotDistanceProfiled extends ProfiledPIDCommand {
+  private static final SimpleMotorFeedforward m_feedforward_turning = 
+  new SimpleMotorFeedforward(Constants.DriveConstants.kStaticVoltsTurning, Constants.DriveConstants.kVelocityVoltsTurning);
+
+
+  
+  /**
+   * Drives the robot to a specific distance from the goal
+   *
+   * @param targetDistance The angle to turn to
+   * @param drive The drive subsystem to use
+   */
+  /*
+  public GoToShotDistanceProfiled(double targetAngleDegrees, DriveSubsystem drive) {
+    super(
+        new ProfiledPIDController(
+            Constants.DriveConstants.kTurningP,
+            Constants.DriveConstants.kTurningI,
+            Constants.DriveConstants.kTurningD,
+            new TrapezoidProfile.Constraints(
+              Constants.DriveConstants.kMaxTurnRateDegPerS,
+              Constants.DriveConstants.kMaxTurnAccelerationDegPerSSquared)),
+        // Close loop on heading
+        drive::getHeading,
+        // Set reference to target
+        targetAngleDegrees,
+        // Turn robot with feedforward in the loop too
+        (output, setpoint) -> drive.arcadeDriveRotation(output + m_feedforward_turning.calculate(setpoint.velocity)),
+        // Require the drive
+        drive);
+
+    // Might be useful
+     .beforeStarting(m_robotDrive::resetEncoders)
+      .withTimeout(10));
+
+    // Set the controller to be continuous (because it is an angle controller)
+    getController().enableContinuousInput(-180, 180);
+    // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
+    // setpoint before it is considered as having reached the reference
+    getController()
+        .setTolerance(DriveConstants.kToleranceDeg, DriveConstants.kRateToleranceDegPerS);
+  }
+
+  */
+}
+
+
+/*
+  // Feed forward constants
+  private final SimpleMotorFeedforward m_feedforward_straight = 
+  new SimpleMotorFeedforward(Constants.DriveConstants.kStaticVoltsStraight, Constants.DriveConstants.kVelocityVoltsStraight);
+
+  // No wheel encoders for now
+  private final ProfiledPIDController m_StraightPID = new ProfiledPIDController(
+    Constants.DriveConstants.kStraightP,
+    Constants.DriveConstants.kStraightI,
+    Constants.DriveConstants.kStraightD,
+    new TrapezoidProfile.Constraints(
+      Constants.DriveConstants.kStraightMaxVelocity,
+      Constants.DriveConstants.kStraightMaxAcceleration));
+  
+  private final ProfiledPIDController m_TurningPID = new ProfiledPIDController(
+    Constants.DriveConstants.kTurningP,
+    Constants.DriveConstants.kTurningI,
+    Constants.DriveConstants.kTurningD,
+    new TrapezoidProfile.Constraints(
+      Constants.DriveConstants.kMaxTurnRateDegPerS,
+      Constants.DriveConstants.kMaxTurnAccelerationDegPerSSquared));
+  */
