@@ -4,15 +4,11 @@ import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 
 public class DriveSubsystem extends SubsystemBase {
@@ -53,17 +49,19 @@ public class DriveSubsystem extends SubsystemBase {
   public void arcadeDrive(double fwd, double rot) {
     xSpeed = fwd;
     xRotation = rot;
-    m_drive.arcadeDrive(fwd, rot);
   }
 
   public void arcadeDriveSpeed(double fwd) {
     xSpeed = fwd;
-    m_drive.arcadeDrive(xSpeed, xRotation);
   }
 
   public void arcadeDriveRotation(double rot) {
     xRotation = rot;
-    m_drive.arcadeDrive(xSpeed, xRotation);
+  }
+
+  public void periodic() {
+    // Set the drive speeds, but don't square them. Let the caller do that
+    m_drive.arcadeDrive(xSpeed, xRotation, false);
   }
   
   /**
