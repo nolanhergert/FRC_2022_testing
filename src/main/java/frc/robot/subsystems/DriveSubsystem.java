@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
@@ -17,7 +18,7 @@ public class DriveSubsystem extends SubsystemBase {
   new MotorControllerGroup(
     new CANSparkMax(DriveConstants.kLeftMotor1Port, MotorType.kBrushless),
     new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless),
-    new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless));
+    new CANSparkMax(DriveConstants.kLeftMotor3Port, MotorType.kBrushless));
 
   // The motors on the right side of the drive.
   private final MotorControllerGroup m_rightMotors =
@@ -62,6 +63,9 @@ public class DriveSubsystem extends SubsystemBase {
   public void periodic() {
     // Set the drive speeds, but don't square them. Let the caller do that
     m_drive.arcadeDrive(xSpeed, xRotation, false);
+    
+    SmartDashboard.putNumber("xSpeed", xSpeed);
+    SmartDashboard.putNumber("xRotation", xRotation);
   }
   
   /**
